@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Resume from "../src/components/Resume";
@@ -13,7 +14,7 @@ const PortfolioIsotope = dynamic(
     ssr: false,
   }
 );
-const Index = () => {
+const Index = ({ data }) => {
   return (
     <Layout pageClassName={"home"}>
       {/* Section - Hero Started */}
@@ -1419,4 +1420,14 @@ const Index = () => {
     </Layout>
   );
 };
+
+export const getServerSideProps = (async () => {
+  // Fetch data from your server or any other API
+  const response = await fetch('https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae');
+  const data = await response.json();
+  
+  // Return the data
+  return { props: { data } };
+})
+
 export default Index;
