@@ -6,7 +6,7 @@ const PortfolioIsotope = dynamic(
     ssr: false,
   }
 );
-const Works = () => {
+const Works = ({data}) => {
   return (
     <Layout>
       {/* Section Started Heading */}
@@ -39,7 +39,7 @@ const Works = () => {
         {/* Works */}
         <div className="v-line v-line-right v-line-top">
           <div className="container">
-            <PortfolioIsotope noViewMore />
+            <PortfolioIsotope noViewMore projects={data.user.projects}/>
             <div className="lui-bgtitle">
               <span> Portfolio </span>
             </div>
@@ -49,4 +49,14 @@ const Works = () => {
     </Layout>
   );
 };
+
+export const getServerSideProps = (async () => {
+  // Fetch data from your server or any other API
+  const response = await fetch('https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae');
+  const data = await response.json();
+  
+  // Return the data
+  return { props: { data } };
+})
+
 export default Works;

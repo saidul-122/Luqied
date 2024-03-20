@@ -1,7 +1,10 @@
 import Isotope from "isotope-layout";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
-const PortfolioIsotope = ({ noViewMore }) => {
+const PortfolioIsotope = ({ noViewMore,projects }) => {
+  // Sort the 'projects' array based on the 'sequence' property
+    projects = projects.sort((a, b) => a.sequence - b.sequence); 
+
   // Isotope
   const isotope = useRef();
   const [filterKey, setFilterKey] = useState("*");
@@ -82,270 +85,55 @@ const PortfolioIsotope = ({ noViewMore }) => {
           </a>
         </div>
         <div className="works-items works-masonry-items row">
-          <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-branding sorting-photo ">
-            <div
-              className="works-item scrolla-element-anim-1 scroll-animate"
-              data-animate="active"
-            >
-              <div className="image">
-                <div className="img">
-                  <Link legacyBehavior href="/work-single">
-                    <a>
-                      <img
-                        decoding="async"
-                        src="assets/images/work4.jpeg"
-                        alt="Zorro"
-                      />
-                      <span className="overlay" />
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="desc">
-                <span className="category"> Branding, Photography </span>
-                <h5 className="name">
-                  <Link legacyBehavior href="/work-single">
-                    <a>Zorro</a>
-                  </Link>
-                </h5>
-                <div className="text">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                </div>
-                <Link legacyBehavior href="/work-single">
-                  <a className="lnk">See project</a>
-                </Link>
-              </div>
+          {projects.map((project)=>{
+            return (
+              project.enabled && <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-ui-ux-design sorting-development sorting-branding sorting-photo ">
               <div
-                className="bg-img"
-                style={{
-                  backgroundImage: "url(assets/images/pat-2.png)",
-                }}
-              />
+                className="works-item scrolla-element-anim-1 scroll-animate"
+                data-animate="active"
+              >
+                <div className="image">
+                  <div className="img">
+                    <Link legacyBehavior href="/work-single">
+                      <a>
+                        <img
+                          decoding="async"
+                          src={project.image.url}
+                          alt="Zorro"
+                        />
+                        <span className="overlay" />
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+                <div className="desc">
+                  <span className="category"> Branding, Photography </span>
+                  <h5 className="name">
+                    <Link legacyBehavior href="/work-single">
+                      <a>{project.title}</a>
+                    </Link>
+                  </h5>
+                  <div className="text">
+                    <p>
+                      {project.description || `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                      do eiusmod tempor incididunt ut labore et dolore.`}
+                    </p>
+                  </div>
+                  <Link legacyBehavior href="/work-single">
+                    <a className="lnk">See project</a>
+                  </Link>
+                </div>
+                <div
+                  className="bg-img"
+                  style={{
+                    backgroundImage: "url(assets/images/pat-2.png)",
+                  }}
+                />
+              </div>
             </div>
-          </div>
-          <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-branding sorting-ui-ux-design ">
-            <div
-              className="works-item scrolla-element-anim-1 scroll-animate"
-              data-animate="active"
-            >
-              <div className="image">
-                <div className="img">
-                  <Link legacyBehavior href="/work-single">
-                    <a>
-                      <img
-                        decoding="async"
-                        src="assets/images/work2.jpeg"
-                        alt="Gooir"
-                      />
-                      <span className="overlay" />
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="desc">
-                <span className="category"> Branding, UI UX Design </span>
-                <h5 className="name">
-                  <Link legacyBehavior href="/work-single">
-                    <a>Gooir</a>
-                  </Link>
-                </h5>
-                <div className="text">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                </div>
-                <Link legacyBehavior href="/work-single">
-                  <a className="lnk">See project</a>
-                </Link>
-              </div>
-              <div
-                className="bg-img"
-                style={{
-                  backgroundImage: "url(assets/images/pat-2.png)",
-                }}
-              />
-            </div>
-          </div>
-          <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-development sorting-ui-ux-design ">
-            <div
-              className="works-item scrolla-element-anim-1 scroll-animate"
-              data-animate="active"
-            >
-              <div className="image">
-                <div className="img">
-                  <Link legacyBehavior href="/work-single">
-                    <a>
-                      <img
-                        decoding="async"
-                        src="assets/images/work7.jpg"
-                        alt="Explore"
-                      />
-                      <span className="overlay" />
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="desc">
-                <span className="category"> Development, UI UX Design </span>
-                <h5 className="name">
-                  <Link legacyBehavior href="/work-single">
-                    <a>Explore</a>
-                  </Link>
-                </h5>
-                <div className="text">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                </div>
-                <Link legacyBehavior href="/work-single">
-                  <a className="lnk">See project</a>
-                </Link>
-              </div>
-              <div
-                className="bg-img"
-                style={{
-                  backgroundImage: "url(assets/images/pat-2.png)",
-                }}
-              />
-            </div>
-          </div>
-          <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-branding sorting-photo ">
-            <div
-              className="works-item scrolla-element-anim-1 scroll-animate"
-              data-animate="active"
-            >
-              <div className="image">
-                <div className="img">
-                  <Link legacyBehavior href="/work-single">
-                    <a>
-                      <img
-                        decoding="async"
-                        src="assets/images/work1.jpeg"
-                        alt="Mozar"
-                      />
-                      <span className="overlay" />
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="desc">
-                <span className="category"> Branding, Photography </span>
-                <h5 className="name">
-                  <Link legacyBehavior href="/work-single">
-                    <a>Mozar</a>
-                  </Link>
-                </h5>
-                <div className="text">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                </div>
-                <Link legacyBehavior href="/work-single">
-                  <a className="lnk">See project</a>
-                </Link>
-              </div>
-              <div
-                className="bg-img"
-                style={{
-                  backgroundImage: "url(assets/images/pat-2.png)",
-                }}
-              />
-            </div>
-          </div>
-          <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-development sorting-ui-ux-design ">
-            <div
-              className="works-item scrolla-element-anim-1 scroll-animate"
-              data-animate="active"
-            >
-              <div className="image">
-                <div className="img">
-                  <Link legacyBehavior href="/work-single">
-                    <a>
-                      <img
-                        decoding="async"
-                        src="assets/images/single8.jpg"
-                        alt="Stay Fit"
-                      />
-                      <span className="overlay" />
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="desc">
-                <span className="category"> Development, UI UX Design </span>
-                <h5 className="name">
-                  <Link legacyBehavior href="/work-single">
-                    <a>Stay Fit</a>
-                  </Link>
-                </h5>
-                <div className="text">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                </div>
-                <Link legacyBehavior href="/work-single">
-                  <a className="lnk">See project</a>
-                </Link>
-              </div>
-              <div
-                className="bg-img"
-                style={{
-                  backgroundImage: "url(assets/images/pat-2.png)",
-                }}
-              />
-            </div>
-          </div>
-          <div className="works-col col-xs-12 col-sm-12 col-md-12 col-lg-12 sorting-development sorting-photo ">
-            <div
-              className="works-item scrolla-element-anim-1 scroll-animate"
-              data-animate="active"
-            >
-              <div className="image">
-                <div className="img">
-                  <Link legacyBehavior href="/work-single">
-                    <a>
-                      <img
-                        decoding="async"
-                        src="assets/images/single6.jpg"
-                        alt="Kana"
-                      />
-                      <span className="overlay" />
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div className="desc">
-                <span className="category"> Development, Photography </span>
-                <h5 className="name">
-                  <Link legacyBehavior href="/work-single">
-                    <a>Kana</a>
-                  </Link>
-                </h5>
-                <div className="text">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                </div>
-                <Link legacyBehavior href="/work-single">
-                  <a className="lnk">See project</a>
-                </Link>
-              </div>
-              <div
-                className="bg-img"
-                style={{
-                  backgroundImage: "url(assets/images/pat-2.png)",
-                }}
-              />
-            </div>
-          </div>
+            )
+          })
+          }
         </div>
         {!noViewMore && (
           <div className="load-more-link">
